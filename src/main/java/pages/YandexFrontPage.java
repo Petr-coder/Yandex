@@ -26,7 +26,7 @@ public class YandexFrontPage extends BasePageObject{
 
         ArrayList<String> tabs2 = new ArrayList<String> (getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs2.get(0));
-        getDriver().close();
+//        getDriver().close();
         getDriver().switchTo().window(tabs2.get(1));
 
 //        String oldTab = getDriver().getWindowHandle();

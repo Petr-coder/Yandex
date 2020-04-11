@@ -14,26 +14,29 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static util.DriverManager.getDriver;
 
 public class YandexMarketPage extends BasePageObject{
-    @FindBy(xpath = "//a[text()='Все категории']")
-    WebElement allCategoriesButton;
+//    @FindBy(xpath = "//a[text()='Все категории']")
+//    WebElement allCategoriesButton;
 
-    @FindBy(xpath = "(//DIV[@role='tablist'])[2]")
-    WebElement listOfCategories;
+    @FindBy(xpath = "//SPAN[text()='Электроника']")
+    WebElement electronicsButton;
+
+    @FindBy(xpath = "//A[@class='home-link home-link_blue_yes home-tabs__link home-tabs__search'][text()='Новости']")
+    WebElement abc;
 
     public YandexMarketPage(WebDriver driver) {
         PageFactory.initElements(getDriver(), this);
 
     }
 
-    public void selectElectronicsPage(String menuItem)  {
-        Actions action = new Actions(getDriver());
-        action.moveToElement(allCategoriesButton).click().build().perform();
-
+    public void selectElectronicsPage()  {
+//        Actions action = new Actions(getDriver());
+//        action.moveToElement(allCategoriesButton).click().build().perform();
+       electronicsButton.click();
 //        Wait<WebDriver> wait = new WebDriverWait(getDriver(), 10, 1000);
 //        wait.until(ExpectedConditions.elementToBeClickable(allCategoriesButton)).click();
 
-        WebElement electronics = listOfCategories.findElement(By.xpath("//*[contains(text(),'"+menuItem+"')]"));
-        action.moveToElement(electronics).click().build().perform();
-        getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL, Keys.PAGE_DOWN);
+//        WebElement electronics = listOfCategories.findElement(By.xpath("//*[contains(text(),'"+menuItem+"')]"));
+//        action.moveToElement(electronics).click().build().perform();
+//        getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL, Keys.PAGE_DOWN);
     }
 }
