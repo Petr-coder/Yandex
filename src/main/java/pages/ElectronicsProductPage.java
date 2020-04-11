@@ -19,7 +19,7 @@ public class ElectronicsProductPage extends BasePageObject {
     @FindBy(xpath = "(//DIV[@class='n-snippet-card2__part n-snippet-card2__part_type_left'])[1]")
     WebElement listOfGoods;
 
-    @FindBy(xpath = "//button[contains(@class,'button_arrow_down button_size_s')]")
+    @FindBy(xpath = "//*[@role= 'listbox' and contains(@class, 'button_arrow_down button_size_s')]")
     WebElement quantityOfGoodsButtons;
 
     @FindBy(xpath = "//select[@class='select__control']")
@@ -33,6 +33,10 @@ public class ElectronicsProductPage extends BasePageObject {
 
     @FindBy(xpath = "(//BUTTON[@role='button'])[1]")
     WebElement searchButton;
+
+//    @FindBy(xpath = "//button[contains(@class,'button2 button2_size_ml button2_type_submit button2_pin_brick-round i-bem suggest2-form__button button2_theme_gray button2_js_inited')]")
+//    WebElement searchButton;
+
 
     @FindBy(xpath = "//*[text()='Все фильтры']")
     WebElement filtersButton;
@@ -48,8 +52,12 @@ public class ElectronicsProductPage extends BasePageObject {
     }
 
     public void selectQuantityOfGoods(int number) throws InterruptedException {
-        Thread.sleep(5000);
-        quantityOfGoodsButtons.click();
+//        Thread.sleep(10000);
+//        Actions action = new Actions(getDriver());
+//        action.moveToElement(quantityOfGoodsButtons).click().build().perform();
+//        quantityOfGoodsButtons.click();
+        Wait<WebDriver> wait = new WebDriverWait(getDriver(), 10, 1000);
+        wait.until(ExpectedConditions.elementToBeClickable(quantityOfGoodsButtons)).click();
         listOfQuantity.findElement(By.xpath("//*[@class = 'popup__content']//*[contains(text(), 'Показывать по " + number + "')]")).click();
     }
 

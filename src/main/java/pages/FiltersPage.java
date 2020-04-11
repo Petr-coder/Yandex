@@ -18,7 +18,7 @@ public class FiltersPage extends BasePageObject{
     @FindBy(xpath = "//*[@name = 'glf-pricefrom-var']")
     WebElement priceFromButton;
 
-    @FindBy(xpath = "//*[text()='Показать подходящие']")
+    @FindBy(xpath = "//a[@role= 'button' and contains(@class, 'action_show-filtered')]")
     WebElement showResultButton;
 
     @FindBy(xpath = "//div[@data-filter-id='7893318']//div[contains(@class, 'list-items')]")
