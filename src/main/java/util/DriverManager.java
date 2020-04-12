@@ -11,12 +11,20 @@ public class DriverManager {
     }
 
     public static WebDriver getDriver() {
-        if (driver == null) {
+        if (!isDriverStarted()) {
             System.setProperty("webdriver.chrome.driver", "drv/chromedriver.exe");
             driver = new ChromeDriver();
         }
         return driver;
     }
 
+    public static void tearDownDriver(){
+        driver.quit();
+        driver = null;
+    }
+
+    public static  boolean isDriverStarted(){
+        return driver != null;
+    }
 
 }

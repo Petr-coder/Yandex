@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import static util.DriverManager.getDriver;
 
-public class YandexFrontPage extends BasePageObject{
+public class YandexFrontPage extends BasePageObject {
     @FindBy(xpath = "//DIV[@class='home-tabs stream-control dropdown2 dropdown2_switcher_elem i-bem home-tabs_js_inited']")
     WebElement menuAboveSearchingBar;
 
@@ -21,22 +21,19 @@ public class YandexFrontPage extends BasePageObject{
 
     }
 
-    public void selectYandexMarketPage(String menuItem)  {
+    public void selectYandexMarketPage(String menuItem) {
         menuAboveSearchingBar.findElement(By.linkText(menuItem)).click();
 
-        ArrayList<String> tabs2 = new ArrayList<String> (getDriver().getWindowHandles());
+        ArrayList<String> tabs2 = new ArrayList<String>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs2.get(0));
 //        getDriver().close();
         getDriver().switchTo().window(tabs2.get(1));
+
 
 //        String oldTab = getDriver().getWindowHandle();
 //        getDriver().findElement(By.linkText(menuItem)).click();
 //        ArrayList<String> newTab = new ArrayList<String>(getDriver().getWindowHandles());
 //        newTab.remove(oldTab);
 //        getDriver().switchTo().window(newTab.get(0));
-
-
-
-
     }
 }

@@ -2,30 +2,41 @@ package steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.junit.AfterClass;
-import util.TestProperties;
-
-import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static util.DriverManager.getDriver;
+import static util.DriverManager.*;
 
 public class BaseSteps {
-//    protected static String baseUrl;
-//    public static Properties properties = TestProperties.getInstance().getProperties();
 
     @Before
     public static void startScenario() {
-        getDriver().get("https://yandex.ru/");
-        getDriver().manage().window().maximize();
-        getDriver().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        getDriver().manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
+        if (!isDriverStarted()) {
+            getDriver().get("https://yandex.ru/");
+            getDriver().manage().window().maximize();
+            getDriver().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+            getDriver().manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        }
     }
 
-
-    @After
+    @After(value = "@Яндекс.Маркет.Наушники")
     public static void tearDown() throws Exception {
-        getDriver().quit();
+        String originalWindow = getDriver().getWindowHandle();
+        final Set<String> oldWindowsSet = getDriver().getWindowHandles();
+
+        for (String window : oldWindowsSet) {
+            if (!window.equals(originalWindow)) {
+                getDriver().close();
+                getDriver().switchTo().window(window);
+                break;
+            }
+        }
+    }
+
+    @After(value = "@Яндекс.Маркет.Телевизоры")
+    public static void tearDownFinal() throws Exception {
+        tearDownDriver();
     }
 
 }
