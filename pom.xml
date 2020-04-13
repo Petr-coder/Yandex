@@ -13,7 +13,7 @@
     <properties>
         <selenium.version>3.8.0</selenium.version>
         <allure-junit4.version>2.6.0</allure-junit4.version>
-        <cucumber.version>4.8.1</cucumber.version>
+        <cucumber.version>1.2.6</cucumber.version>
         <allure.version>1.5.2</allure.version>
         <aspectj.version>1.8.10</aspectj.version>
 
@@ -29,7 +29,7 @@
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber4-jvm</artifactId>
+            <artifactId>allure-cucumber-jvm</artifactId>
             <version>2.13.2</version>
         </dependency>
 
@@ -93,7 +93,7 @@
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.options="--plugin io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"
+                        -Dcucumber.options="--plugin util.AllureReporter"
                     </argLine>
                     <systemProperties>
                         <property>

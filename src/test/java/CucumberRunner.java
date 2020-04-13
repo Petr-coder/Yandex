@@ -1,5 +1,5 @@
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
         features = {"src/test/resources/TVYandexTest.feature", "src/test/resources/HeadphonesYandexTest.feature"},
         glue = {"steps"},
         tags = {"@Яндекс.Маркет.Телевизоры, @Яндекс.Маркет.Наушники"},
-        plugin = {"io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"})
+        plugin = {"util.AllureReporter"})
 
 public class CucumberRunner{
 }

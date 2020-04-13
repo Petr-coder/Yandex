@@ -1,23 +1,25 @@
 package util;
 
+import gherkin.formatter.model.Result;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
-import io.qameta.allure.junit4.AllureJunit4;
-import org.junit.runner.notification.Failure;
+import io.qameta.allure.cucumberjvm.AllureCucumberJvm;
+import io.qameta.allure.model.Status;
+import io.qameta.allure.util.ResultsUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import static util.DriverManager.getDriver;
-
-public class AllureReporter extends AllureJunit4 {
+public class AllureReporter extends AllureCucumberJvm {
 
     @Override
-    public void testFailure(Failure failure) throws Exception {
-        takeScreenShot();
-        super.testFailure(failure);
+    public void result(Result result) {
+        if (!result.getStatus().equals("passed") && !result.getStatus().equals("skipped")) {
+            Allure.getLifecycle().addAttachment("С к р и н ш о т", "image/png", ".png", takeScreenshot());
+        }
+        super.result(result);
     }
-    @Attachment(type= "img/png", value = "Скриншот при ошибке")
-    public byte [] takeScreenShot(){
 
-        return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
+    public static byte[] takeScreenshot() {
+        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 }

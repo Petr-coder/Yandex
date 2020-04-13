@@ -1,7 +1,7 @@
 package steps;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 

@@ -1,10 +1,7 @@
 package steps;
 
-import io.cucumber.java.en.When;
+import cucumber.api.java.en.When;
 import pages.FiltersPage;
-import pages.SectionElectronicsPage;
-
-import static util.DriverManager.getDriver;
 
 public class FiltersSteps {
 

@@ -2,10 +2,9 @@ package pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -42,7 +41,6 @@ public class ElectronicsProductPage extends BasePageObject {
     WebElement filtersButton;
 
 
-
     public ElectronicsProductPage(WebDriver driver) {
         PageFactory.initElements(getDriver(), this);
     }
@@ -52,13 +50,14 @@ public class ElectronicsProductPage extends BasePageObject {
     }
 
     public void selectQuantityOfGoods(int number) throws InterruptedException {
-//        Thread.sleep(10000);
-//        Actions action = new Actions(getDriver());
-//        action.moveToElement(quantityOfGoodsButtons).click().build().perform();
-//        quantityOfGoodsButtons.click();
-        Wait<WebDriver> wait = new WebDriverWait(getDriver(), 10, 1000);
-        wait.until(ExpectedConditions.elementToBeClickable(quantityOfGoodsButtons)).click();
-        listOfQuantity.findElement(By.xpath("//*[@class = 'popup__content']//*[contains(text(), 'Показывать по " + number + "')]")).click();
+        Wait<WebDriver> wait = new WebDriverWait(getDriver(), 5, 1000);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(quantityOfGoodsButtons)).click();
+            listOfQuantity.findElement(By.xpath("//*[@class = 'popup__content']//*[contains(text(), 'Показывать по " + number + "')]")).click();
+        } catch (TimeoutException ex) {
+
+        }
+
     }
 
     String word = firstLineOfSearch.getText();
@@ -68,11 +67,11 @@ public class ElectronicsProductPage extends BasePageObject {
     }
 
     public void pressSearchButton() {
-        Actions action = new Actions(getDriver());
-        action.moveToElement(searchButton).click().build().perform();
+        Wait<WebDriver> wait = new WebDriverWait(getDriver(), 5, 1000);
+        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
     }
 
-    public void inputTitleElement(){
+    public void inputTitleElement() {
         insertName(word);
         pressSearchButton();
     }
